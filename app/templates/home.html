@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3 border">
+    <div class="container-fluid py-4">
+        <h1 class="display-5 fw-bold">Toxicity Moderation</h1>
+
+        <p class="col-md-8 fs-5">
+            Сервіс для модерації користувацьких коментарів
+            із пояснюваною класифікацією токсичності.
+        </p>
+
+        <a href="/dashboard" class="btn btn-primary btn-lg">
+            Відкрити панель модератора
+        </a>
+
+        <a href="/add-comment" class="btn btn-outline-secondary btn-lg">
+            Додати тестовий коментар
+        </a>
+    </div>
+</div>
+{% endblock %}

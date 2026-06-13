@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">Деталі коментаря #{{ comment.id }}</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <p class="text-muted mb-1">Автор</p>
+        <h5>{{ comment.author_name }}</h5>
+
+        <hr>
+
+        <p class="text-muted mb-1">Текст коментаря</p>
+        <p class="fs-5">{{ comment.text }}</p>
+
+        <hr>
+
+        <p class="text-muted mb-1">Автоматична класифікація</p>
+
+        {% if comment.model_label == "toxic" %}
+            <span class="badge bg-danger">Токсичний</span>
+        {% elif comment.model_label == "suspicious" %}
+            <span class="badge bg-warning text-dark">Підозрілий</span>
+        {% elif comment.model_label == "non-toxic" %}
+            <span class="badge bg-success">Нетоксичний</span>
+        {% else %}
+            <span class="badge bg-secondary">{{ comment.model_label }}</span>
+        {% endif %}
+
+        <span class="ms-2">
+            Score: {{ "%.2f"|format(comment.toxicity_score) }}
+        </span>
+
+        <hr>
+
+        <p class="text-muted mb-1">Пояснення рішення</p>
+
+        {% if comment.explanation_json %}
+            {% for item in comment.explanation_json %}
+                <span class="badge bg-dark me-1">
+                    {{ item.word }} — {{ item.weight }}
+                </span>
+            {% endfor %}
+        {% else %}
+            <span class="text-muted">Пояснення відсутнє</span>
+        {% endif %}
+
+        <hr>
+
+        <p class="text-muted mb-1">Статус модерації</p>
+
+        {% if comment.moderation_status == "approved" %}
+            <span class="badge bg-success">Схвалено</span>
+        {% elif comment.moderation_status == "rejected" %}
+            <span class="badge bg-danger">Відхилено</span>
+        {% else %}
+            <span class="badge bg-secondary">Очікує</span>
+        {% endif %}
+
+        <hr>
+
+        <form
+            method="post"
+            action="/comments/{{ comment.id }}/approve"
+            class="d-inline"
+        >
+            <button class="btn btn-success">
+                Схвалити
+            </button>
+        </form>
+
+        <form
+            method="post"
+            action="/comments/{{ comment.id }}/reject"
+            class="d-inline"
+        >
+            <button class="btn btn-danger">
+                Відхилити
+            </button>
+        </form>
+
+        <a href="/dashboard" class="btn btn-outline-secondary">
+            Назад
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

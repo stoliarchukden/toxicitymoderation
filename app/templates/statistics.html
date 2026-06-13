@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">Статистика</h1>
+
+<div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Всього коментарів</h6>
+                <h2>{{ stats.total_comments }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Токсичні</h6>
+                <h2 class="text-danger">{{ stats.toxic_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Підозрілі</h6>
+                <h2 class="text-warning">{{ stats.suspicious_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Нетоксичні</h6>
+                <h2 class="text-success">{{ stats.non_toxic_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Очікують рішення</h6>
+                <h2>{{ stats.pending_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Схвалено</h6>
+                <h2 class="text-success">{{ stats.approved_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h6 class="text-muted">Відхилено</h6>
+                <h2 class="text-danger">{{ stats.rejected_count }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card shadow-sm border-0 mt-4">
+    <div class="card-body">
+        <h5>Частка токсичних коментарів</h5>
+
+        <div class="progress mt-3" style="height: 28px;">
+            <div
+                class="progress-bar bg-danger"
+                role="progressbar"
+                style="width: {{ stats.toxic_percent }}%;"
+            >
+                {{ stats.toxic_percent }}%
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

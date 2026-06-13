@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">Додати коментар</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        <form method="post">
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Автор
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    name="author_name"
+                    placeholder="Введіть ім'я автора"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Текст коментаря
+                </label>
+
+                <textarea
+                    class="form-control"
+                    rows="5"
+                    name="text"
+                    placeholder="Введіть текст коментаря англійською мовою"
+                    required
+                ></textarea>
+            </div>
+
+            <button class="btn btn-primary">
+                Додати коментар
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

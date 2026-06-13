@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">Журнал модерації</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+
+        {% if actions %}
+
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ID коментаря</th>
+                    <th>Модератор</th>
+                    <th>Дія</th>
+                    <th>Старий статус</th>
+                    <th>Новий статус</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for action in actions %}
+                <tr>
+                    <td>{{ action.id }}</td>
+                    <td>{{ action.comment_id }}</td>
+                    <td>{{ action.moderator_name }}</td>
+                    <td>{{ action.action_type }}</td>
+                    <td>{{ action.old_status }}</td>
+                    <td>{{ action.new_status }}</td>
+                    <td>{{ action.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+
+        <div class="alert alert-info mb-0">
+            Дій модератора поки немає.
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
